@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESTE API QUE LEGAL (SOCORRO)</title>
+    <script>
+        //post no endpoint /api/register
+        async function registerUser() {
+            const data = {
+                username: 'testeuser',
+                email:"macaco@gmail.com",
+                password: 'seilarapaziada'
+            };
+        
+            const response = await fetch('http://localhost/pomodoro_project/api/index.php/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+        
+            const result = await response.json();
+            console.log('Resultado de Register:', result);
+            alert('Registro: ' + result.message);
+        }
+        
+
+        //post no endpoint /api/login
+        async function loginUser() {
+            const data = {
+                username: 'testeuser',
+                email:"macaco@gmail.com",
+                password: 'seilarapaziada'
+            };
+
+            const response = await fetch('http://localhost/pomodoro_project/api/index.php/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log('Resultado de Login:', result);
+            alert('Login: ' + result.message);
+        }
+
+        //iniciar sessão
+        async function startPomodoroSession() {
+            const data = {
+                user_id: 1, 
+                subject:'sei la rapaziada',
+                duration: 25 
+            };
+
+            const response = await fetch('http://localhost/pomodoro_project/api/index.php/api/pomodoro/start',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log('Resultado de iniciar pomodoro:', result);
+            alert('Iniciar Pomodoro: ' + result.message);
+        }
+
+        // retornar a sessão do pomodoro
+        async function validatePomodoroSession() {
+            const data = {
+                session_id: '12345', // exemplo de id para uma sessão já fixa
+                is_valid: true
+            };
+            const response = await fetch('http://localhost/pomodoro_project/api/index.php/api/session/validate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log('Resultado de validar sessão:', result);
+            alert('Validar sessão: ' + result.message);
+        }
+
+        // pegar o leaderboard 
+        async function getLeaderboard() {
+            const response = await fetch('http://localhost/pomodoro_project/api/index.php/api/statistics/leaderboard', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+            console.log('Leaderboard:', result);
+            alert('Leaderboard: ' + JSON.stringify(result));
+        }
+    </script>
+</head>
+<body>
+    <h1>TESTE DA API POMODORO VOU FICAR MALUCO</h1>
+
+    <button onclick="registerUser()">registrar usuario</button><br><br>
+    <button onclick="loginUser()">login</button><br><br>
+    <button onclick="startPomodoroSession()">sessao pomodooro</button><br><br>
+    <button onclick="validatePomodoroSession()">validar sessao</button><br><br>
+    <button onclick="getLeaderboard()">segue o lider segue o lider</button><br><br>
+
+</body>
+</html>
