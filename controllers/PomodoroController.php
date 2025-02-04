@@ -17,4 +17,20 @@ class PomodoroController {
         }
         return ['status' => false, 'message' => 'Erro ao começar a sessão'];
     }
+    public function validateSession($session_id, $is_valid) {
+        $query = "UPDATE sessions SET is_valid = :is_valid WHERE id = :session_id";
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->bindParam(':is_valid', $is_valid, PDO::PARAM_BOOL);
+        $stmt->bindParam(':session_id', $session_id);
+    
+        return $stmt->execute();
+    }
+    
+    public function updateStatistics($user_id, $duration) {
+        $statsModel = new StatisticsModel($this->conn);
+        return $statsModel->addMinutes($user_id, $duration);
+    }
+    
 }
+
