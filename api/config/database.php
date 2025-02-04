@@ -1,10 +1,10 @@
 <?php
 
 class Database {
-    private $host = "localhost";
+    private $host = "tangibly-elegant-veery.data-1.use1.tembo.io";
     private $db_name = "pomodoro_db";
-    private $username = "root";
-    private $password = "";
+    private $username = "postgres";
+    private $password = "mBOaU56EjpR9aYgp";
     public $conn;
 
     public function getConnection() {
